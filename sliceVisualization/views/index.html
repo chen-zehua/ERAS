@@ -1,0 +1,35 @@
+<html>
+<body>
+<script src="/static/js/jquery.js"></script>
+<script src="/static/js/springy.js"></script>
+<script src="/static/js/springyui.js"></script>
+
+
+<script>
+
+function ajaxLog (s) {
+  var txt = jQuery('#springydemo');
+  txt.val(txt.val() + '\n' + s);
+}
+
+jQuery('#springydemo').val('');
+
+jQuery.get('/ajax', function (data, status){
+  // ajaxLog(data);
+  // alert("数据:"+data+"\n状态:"+status);
+  var graph = new Springy.Graph();
+  graph.loadJSON(data);
+
+  var springy = jQuery('#springydemo').springy({
+    graph: graph
+  });
+});
+
+</script>
+
+<div align="center">
+  <canvas id="springydemo" width="1024" height="768" />
+</div>
+
+</body>
+</html>
